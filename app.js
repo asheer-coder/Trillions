@@ -208,6 +208,8 @@ window.addEventListener(
         renderShortcuts("sup", "supBox");
         renderShortcuts("con", "conBox");
         renderShortcuts("pay", "payBox");
+        renderShortcuts("stock", "stockBox");
+        renderShortcuts("order", "orderBox");
 
         renderContacts();
     }
