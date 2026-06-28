@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<header><h1>TRILLIONS</h1></header>
+<header>
+    <h1>TRILLIONS</h1>
+</header>
 
 <div class="sidebar">
     <a href="index.html">🏠 Dashboard</a>
@@ -21,34 +23,46 @@
 <div class="content">
 
     <div class="slider">
-        <span id="slideText">Fancy Ladies Slippers</span>
+        <span id="slideText">
+            Fancy Ladies Slippers
+        </span>
     </div>
 
     <div class="card">
+
         <h2>Contacts</h2>
 
         <input
             id="name"
             type="text"
-            placeholder="Name"
+            placeholder="Enter Name"
         >
+
+        <br><br>
 
         <input
             id="phone"
             type="text"
-            placeholder="Phone Number"
+            placeholder="Enter Phone Number"
         >
+
+        <br><br>
 
         <textarea
             id="desc"
             placeholder="Description"
         ></textarea>
 
-        <button onclick="saveContact()">
-            Save Contact
+        <br><br>
+
+        <button
+            type="button"
+            onclick="saveContact()"
+        >
+            💾 Save Contact
         </button>
 
-        <br><br>
+        <hr>
 
         <input
             id="searchBox"
@@ -59,15 +73,21 @@
 
         <hr>
 
-        <button onclick="addShortcut('con','conBox')">
-            + Add Shortcut
+        <button
+            type="button"
+            onclick="addShortcut('con','conBox')"
+        >
+            ➕ Add Shortcut
         </button>
 
         <div id="conBox"></div>
 
         <hr>
 
+        <h3>Saved Contacts</h3>
+
         <div id="contactList"></div>
+
     </div>
 
     <div class="card">
