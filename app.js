@@ -1,10 +1,49 @@
+// ================= SLIDER =================
+
+const slides = [
+    "Fancy Ladies Slippers",
+    "Boys Sandals",
+    "Sports Shoes",
+    "Fashion Footwear"
+];
+
+let slideIndex = 0;
+
+setInterval(() => {
+    const text =
+        document.getElementById("slideText");
+
+    if (text) {
+        slideIndex =
+            (slideIndex + 1) % slides.length;
+
+        text.innerText =
+            slides[slideIndex];
+    }
+}, 2000);
+
+// ================= MOBILE MENU =================
+
+function toggleMenu() {
+    const sidebar =
+        document.querySelector(".sidebar");
+
+    if (sidebar) {
+        sidebar.classList.toggle("active");
+    }
+}
+
 // ================= SHORTCUTS =================
 
 function addShortcut(key, boxId) {
-    let name = prompt("Enter Shortcut Name");
+    let name =
+        prompt("Enter Shortcut Name");
+
     if (!name) return;
 
-    let url = prompt("Enter Website URL");
+    let url =
+        prompt("Enter Website URL");
+
     if (!url) return;
 
     if (
@@ -32,7 +71,9 @@ function addShortcut(key, boxId) {
 }
 
 function renderShortcuts(key, boxId) {
-    const box = document.getElementById(boxId);
+    const box =
+        document.getElementById(boxId);
+
     if (!box) return;
 
     box.innerHTML = "";
@@ -42,29 +83,47 @@ function renderShortcuts(key, boxId) {
     );
 
     data.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.style.marginBottom = "10px";
+        const div =
+            document.createElement("div");
 
-        const openBtn = document.createElement("button");
-        openBtn.innerText = item.name;
+        const openBtn =
+            document.createElement("button");
+
+        openBtn.innerText =
+            item.name;
+
         openBtn.onclick = () => {
-            window.open(item.url, "_blank");
+            window.open(
+                item.url,
+                "_blank"
+            );
         };
 
-        const delBtn = document.createElement("button");
+        const delBtn =
+            document.createElement("button");
+
         delBtn.innerText = "❌";
-        delBtn.style.marginLeft = "10px";
+
         delBtn.onclick = () => {
-            deleteShortcut(key, index, boxId);
+            deleteShortcut(
+                key,
+                index,
+                boxId
+            );
         };
 
         div.appendChild(openBtn);
         div.appendChild(delBtn);
+
         box.appendChild(div);
     });
 }
 
-function deleteShortcut(key, index, boxId) {
+function deleteShortcut(
+    key,
+    index,
+    boxId
+) {
     let data = JSON.parse(
         localStorage.getItem(key) || "[]"
     );
@@ -82,25 +141,49 @@ function deleteShortcut(key, index, boxId) {
 // ================= CONTACTS =================
 
 function saveContact() {
+    const nameInput =
+        document.getElementById("name");
+
+    const phoneInput =
+        document.getElementById("phone");
+
+    const descInput =
+        document.getElementById("desc");
+
+    if (
+        !nameInput ||
+        !phoneInput ||
+        !descInput
+    ) {
+        return;
+    }
+
     const name =
-        document.getElementById("name")?.value.trim();
+        nameInput.value.trim();
 
     const phone =
-        document.getElementById("phone")?.value.trim();
+        phoneInput.value.trim();
 
     const desc =
-        document.getElementById("desc")?.value.trim();
+        descInput.value.trim();
 
-    if (!name || !phone) {
-        alert("Name and Phone Number are required.");
+    if (
+        name === "" ||
+        phone === ""
+    ) {
+        alert(
+            "Enter Name and Phone Number"
+        );
         return;
     }
 
     let contacts = JSON.parse(
-        localStorage.getItem("contacts") || "[]"
+        localStorage.getItem(
+            "contacts"
+        ) || "[]"
     );
 
-    contacts.push({
+    contacts.unshift({
         name,
         phone,
         desc
@@ -111,46 +194,60 @@ function saveContact() {
         JSON.stringify(contacts)
     );
 
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("desc").value = "";
+    nameInput.value = "";
+    phoneInput.value = "";
+    descInput.value = "";
+
+    alert("Contact Saved!");
 
     renderContacts();
 }
 
-function renderContacts() {
+function renderContacts(
+    list = null
+) {
     const box =
-        document.getElementById("contactList");
+        document.getElementById(
+            "contactList"
+        );
 
     if (!box) return;
 
-    let contacts = JSON.parse(
-        localStorage.getItem("contacts") || "[]"
-    );
+    const contacts =
+        list ||
+        JSON.parse(
+            localStorage.getItem(
+                "contacts"
+            ) || "[]"
+        );
 
     box.innerHTML = "";
 
-    contacts.forEach((c, index) => {
-        const div = document.createElement("div");
-        div.style.marginBottom = "15px";
+    contacts.forEach(
+        (c, index) => {
+            box.innerHTML += `
+                <div class="contact-card">
+                    <b>${c.name}</b><br>
+                    📞 ${c.phone}<br>
+                    ${c.desc}<br><br>
 
-        div.innerHTML = `
-            <b>${c.name}</b><br>
-            📞 ${c.phone}<br>
-            ${c.desc}<br>
-            <button onclick="deleteContact(${index})">
-                ❌ Delete
-            </button>
-            <hr>
-        `;
+                    <button
+                    onclick="deleteContact(${index})">
+                    ❌ Delete
+                    </button>
 
-        box.appendChild(div);
-    });
+                    <hr>
+                </div>
+            `;
+        }
+    );
 }
 
 function deleteContact(index) {
     let contacts = JSON.parse(
-        localStorage.getItem("contacts") || "[]"
+        localStorage.getItem(
+            "contacts"
+        ) || "[]"
     );
 
     contacts.splice(index, 1);
@@ -164,39 +261,30 @@ function deleteContact(index) {
 }
 
 function searchContacts() {
-    const search =
-        document.getElementById("searchBox")
-            ?.value.toLowerCase() || "";
-
-    const box =
-        document.getElementById("contactList");
-
-    if (!box) return;
+    const text =
+        document
+            .getElementById(
+                "searchBox"
+            )
+            ?.value
+            .toLowerCase() || "";
 
     let contacts = JSON.parse(
-        localStorage.getItem("contacts") || "[]"
+        localStorage.getItem(
+            "contacts"
+        ) || "[]"
     );
 
-    box.innerHTML = "";
+    const filtered =
+        contacts.filter(
+            c =>
+                c.name
+                    .toLowerCase()
+                    .includes(text) ||
+                c.phone.includes(text)
+        );
 
-    contacts
-        .filter(c =>
-            c.name.toLowerCase().includes(search) ||
-            c.phone.includes(search)
-        )
-        .forEach((c, index) => {
-            box.innerHTML += `
-                <div>
-                    <b>${c.name}</b><br>
-                    📞 ${c.phone}<br>
-                    ${c.desc}<br>
-                    <button onclick="deleteContact(${index})">
-                        ❌ Delete
-                    </button>
-                    <hr>
-                </div>
-            `;
-        });
+    renderContacts(filtered);
 }
 
 // ================= PAGE LOAD =================
@@ -204,12 +292,35 @@ function searchContacts() {
 window.addEventListener(
     "DOMContentLoaded",
     () => {
-        renderShortcuts("ret", "retBox");
-        renderShortcuts("sup", "supBox");
-        renderShortcuts("con", "conBox");
-        renderShortcuts("pay", "payBox");
-        renderShortcuts("stock", "stockBox");
-        renderShortcuts("order", "orderBox");
+        renderShortcuts(
+            "ret",
+            "retBox"
+        );
+
+        renderShortcuts(
+            "sup",
+            "supBox"
+        );
+
+        renderShortcuts(
+            "con",
+            "conBox"
+        );
+
+        renderShortcuts(
+            "pay",
+            "payBox"
+        );
+
+        renderShortcuts(
+            "stock",
+            "stockBox"
+        );
+
+        renderShortcuts(
+            "order",
+            "orderBox"
+        );
 
         renderContacts();
     }
