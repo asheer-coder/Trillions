@@ -5,8 +5,10 @@ function addShortcut(key, boxId) {
     let url = prompt("Enter Website URL");
     if (!url) return;
 
-    if (!url.startsWith("http://") &&
-        !url.startsWith("https://")) {
+    if (
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ) {
         url = "https://" + url;
     }
 
@@ -39,17 +41,23 @@ function renderShortcuts(key, boxId) {
 
     data.forEach((item, index) => {
         const div = document.createElement("div");
+        div.style.marginBottom = "10px";
 
-        div.innerHTML = `
-            <button onclick="window.open('${item.url}','_blank')">
-                ${item.name}
-            </button>
+        const openBtn = document.createElement("button");
+        openBtn.innerText = item.name;
+        openBtn.onclick = () => {
+            window.open(item.url, "_blank");
+        };
 
-            <button onclick="deleteShortcut('${key}',${index},'${boxId}')">
-                ❌
-            </button>
-        `;
+        const delBtn = document.createElement("button");
+        delBtn.innerText = "❌";
+        delBtn.style.marginLeft = "10px";
+        delBtn.onclick = () => {
+            deleteShortcut(key, index, boxId);
+        };
 
+        div.appendChild(openBtn);
+        div.appendChild(delBtn);
         box.appendChild(div);
     });
 }
@@ -68,3 +76,11 @@ function deleteShortcut(key, index, boxId) {
 
     renderShortcuts(key, boxId);
 }
+
+// Sab pages ke shortcuts automatically load karega
+window.addEventListener("DOMContentLoaded", () => {
+    renderShortcuts("ret", "retBox");
+    renderShortcuts("sup", "supBox");
+    renderShortcuts("con", "conBox");
+    renderShortcuts("pay", "payBox");
+});
