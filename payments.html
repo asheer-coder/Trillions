@@ -1,24 +1,54 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'>
-<title>Payments</title><link rel='stylesheet' href='style.css'></head>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Payments</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<header><h1>TRILLIONS</h1></header>
+
+<header>
+    <h1>TRILLIONS</h1>
+</header>
+
 <div class="sidebar">
-<a href="index.html">🏠 Dashboard</a>
-<a href="retailers.html">👥 Retailers</a>
-<a href="suppliers.html">🏭 Suppliers</a>
-<a href="payments.html">💳 Payments</a>
-<a href="contacts.html">📞 Contacts</a>
-<a href="gallery.html">🖼️ Gallery</a>
+    <a href="index.html">🏠 Dashboard</a>
+    <a href="retailers.html">👥 Retailers</a>
+    <a href="suppliers.html">🏭 Suppliers</a>
+    <a href="payments.html">💳 Payments</a>
+    <a href="contacts.html">📞 Contacts</a>
+    <a href="gallery.html">🖼️ Gallery</a>
 </div>
 
-<div class='content'>
-<div class='slider'><span id='slideText'>Fancy Ladies Slippers</span></div>
-<div class='card'><h2>Payment Shortcuts</h2><button onclick="addShortcut('pay','payBox')">+ Add Shortcut</button><div id='payBox'></div></div><script>renderShortcuts('pay','payBox')</script>
-<div class='card'>
-<h3>Trillions Supply</h3>
-<p>📞 6391318530</p>
-<p>✉️ trillions_supply@gmail.com</p>
+<div class="content">
+
+    <div class="slider">
+        <span id="slideText">Fancy Ladies Slippers</span>
+    </div>
+
+    <div class="card">
+        <h2>Payment Shortcuts</h2>
+
+        <button onclick="addShortcut('pay','payBox')">
+            + Add Shortcut
+        </button>
+
+        <div id="payBox"></div>
+    </div>
+
+    <div class="card">
+        <h3>Trillions Supply</h3>
+        <p>📞 6391318530</p>
+        <p>✉️ trillions_supply@gmail.com</p>
+    </div>
+
 </div>
-</div>
-<script src='app.js'></script>
-</body></html>
+
+<script src="app.js"></script>
+
+<script>
+    renderShortcuts('pay','payBox');
+</script>
+
+</body>
+</html>
