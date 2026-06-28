@@ -1,24 +1,50 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'>
-<title>Retailers</title><link rel='stylesheet' href='style.css'></head>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Retailers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
+
 <header><h1>TRILLIONS</h1></header>
+
 <div class="sidebar">
-<a href="index.html">🏠 Dashboard</a>
-<a href="retailers.html">👥 Retailers</a>
-<a href="suppliers.html">🏭 Suppliers</a>
-<a href="payments.html">💳 Payments</a>
-<a href="contacts.html">📞 Contacts</a>
-<a href="gallery.html">🖼️ Gallery</a>
+    <a href="index.html">🏠 Dashboard</a>
+    <a href="retailers.html">👥 Retailers</a>
+    <a href="suppliers.html">🏭 Suppliers</a>
+    <a href="payments.html">💳 Payments</a>
+    <a href="contacts.html">📞 Contacts</a>
+    <a href="gallery.html">🖼️ Gallery</a>
 </div>
 
-<div class='content'>
-<div class='slider'><span id='slideText'>Fancy Ladies Slippers</span></div>
-<div class='card'><h2>Retailer Shortcuts</h2><button onclick="addShortcut('ret','retBox')">+ Add Shortcut</button><div id='retBox'></div></div><script>renderShortcuts('ret','retBox')</script>
-<div class='card'>
-<h3>Trillions Supply</h3>
-<p>📞 6391318530</p>
-<p>✉️ trillions_supply@gmail.com</p>
+<div class="content">
+    <div class="slider">
+        <span id="slideText">Fancy Ladies Slippers</span>
+    </div>
+
+    <div class="card">
+        <h2>Retailer Shortcuts</h2>
+
+        <button onclick="addShortcut('ret','retBox')">
+            + Add Shortcut
+        </button>
+
+        <div id="retBox"></div>
+    </div>
+
+    <div class="card">
+        <h3>Trillions Supply</h3>
+        <p>📞 6391318530</p>
+        <p>✉️ trillions_supply@gmail.com</p>
+    </div>
 </div>
-</div>
-<script src='app.js'></script>
-</body></html>
+
+<script src="app.js"></script>
+
+<script>
+    renderShortcuts('ret','retBox');
+</script>
+
+</body>
+</html>
