@@ -27,10 +27,35 @@
     <div class="card">
         <h2>Contacts</h2>
 
-        <input placeholder="Name">
-        <input placeholder="Phone Number">
-        <textarea placeholder="Description"></textarea>
-        <button>Save Contact</button>
+        <input
+            id="name"
+            type="text"
+            placeholder="Name"
+        >
+
+        <input
+            id="phone"
+            type="text"
+            placeholder="Phone Number"
+        >
+
+        <textarea
+            id="desc"
+            placeholder="Description"
+        ></textarea>
+
+        <button onclick="saveContact()">
+            Save Contact
+        </button>
+
+        <br><br>
+
+        <input
+            id="searchBox"
+            type="text"
+            placeholder="Search by name or number"
+            onkeyup="searchContacts()"
+        >
 
         <hr>
 
@@ -39,6 +64,10 @@
         </button>
 
         <div id="conBox"></div>
+
+        <hr>
+
+        <div id="contactList"></div>
     </div>
 
     <div class="card">
@@ -50,10 +79,6 @@
 </div>
 
 <script src="app.js"></script>
-
-<script>
-    renderShortcuts('con','conBox');
-</script>
 
 </body>
 </html>
