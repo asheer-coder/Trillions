@@ -1,3 +1,5 @@
+// ================= SHORTCUTS =================
+
 function addShortcut(key, boxId) {
     let name = prompt("Enter Shortcut Name");
     if (!name) return;
@@ -77,10 +79,136 @@ function deleteShortcut(key, index, boxId) {
     renderShortcuts(key, boxId);
 }
 
-// Sab pages ke shortcuts automatically load karega
-window.addEventListener("DOMContentLoaded", () => {
-    renderShortcuts("ret", "retBox");
-    renderShortcuts("sup", "supBox");
-    renderShortcuts("con", "conBox");
-    renderShortcuts("pay", "payBox");
-});
+// ================= CONTACTS =================
+
+function saveContact() {
+    const name =
+        document.getElementById("name")?.value.trim();
+
+    const phone =
+        document.getElementById("phone")?.value.trim();
+
+    const desc =
+        document.getElementById("desc")?.value.trim();
+
+    if (!name || !phone) {
+        alert("Name and Phone Number are required.");
+        return;
+    }
+
+    let contacts = JSON.parse(
+        localStorage.getItem("contacts") || "[]"
+    );
+
+    contacts.push({
+        name,
+        phone,
+        desc
+    });
+
+    localStorage.setItem(
+        "contacts",
+        JSON.stringify(contacts)
+    );
+
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("desc").value = "";
+
+    renderContacts();
+}
+
+function renderContacts() {
+    const box =
+        document.getElementById("contactList");
+
+    if (!box) return;
+
+    let contacts = JSON.parse(
+        localStorage.getItem("contacts") || "[]"
+    );
+
+    box.innerHTML = "";
+
+    contacts.forEach((c, index) => {
+        const div = document.createElement("div");
+        div.style.marginBottom = "15px";
+
+        div.innerHTML = `
+            <b>${c.name}</b><br>
+            📞 ${c.phone}<br>
+            ${c.desc}<br>
+            <button onclick="deleteContact(${index})">
+                ❌ Delete
+            </button>
+            <hr>
+        `;
+
+        box.appendChild(div);
+    });
+}
+
+function deleteContact(index) {
+    let contacts = JSON.parse(
+        localStorage.getItem("contacts") || "[]"
+    );
+
+    contacts.splice(index, 1);
+
+    localStorage.setItem(
+        "contacts",
+        JSON.stringify(contacts)
+    );
+
+    renderContacts();
+}
+
+function searchContacts() {
+    const search =
+        document.getElementById("searchBox")
+            ?.value.toLowerCase() || "";
+
+    const box =
+        document.getElementById("contactList");
+
+    if (!box) return;
+
+    let contacts = JSON.parse(
+        localStorage.getItem("contacts") || "[]"
+    );
+
+    box.innerHTML = "";
+
+    contacts
+        .filter(c =>
+            c.name.toLowerCase().includes(search) ||
+            c.phone.includes(search)
+        )
+        .forEach((c, index) => {
+            box.innerHTML += `
+                <div>
+                    <b>${c.name}</b><br>
+                    📞 ${c.phone}<br>
+                    ${c.desc}<br>
+                    <button onclick="deleteContact(${index})">
+                        ❌ Delete
+                    </button>
+                    <hr>
+                </div>
+            `;
+        });
+}
+
+// ================= PAGE LOAD =================
+
+window.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        renderShortcuts("ret", "retBox");
+        renderShortcuts("sup", "supBox");
+        renderShortcuts("con", "conBox");
+        renderShortcuts("pay", "payBox");
+
+        renderContacts();
+    }
+);
